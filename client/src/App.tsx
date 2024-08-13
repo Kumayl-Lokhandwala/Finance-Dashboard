@@ -9,7 +9,7 @@ function App() {
     <div className='app'>
       <ThemeProvider theme = {theme}>
         <CssBaseline/>
-        hi
+        Checking this branch
       </ThemeProvider>
     </div>
   )
