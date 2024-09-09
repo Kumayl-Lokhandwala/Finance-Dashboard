@@ -60,6 +60,7 @@ const Dashboard = () => {
       height="100%"
       display="grid"
       gap="1.5rem"
+      marginBottom="100px"
       sx={
         isAboveMediumScreens
           ? {
@@ -72,7 +73,9 @@ const Dashboard = () => {
               gridAutoRows: "80px",
               gridTemplateAreas: gridTemplateSmallScreens,
             }
+          
       }
+
     >
       <Row1 />
       <Row2 />
