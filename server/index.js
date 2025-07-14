@@ -7,7 +7,11 @@ import helmet from "helmet";
 import morgan from "morgan";
 import kpiRoutes from "./routes/kpi.js";
 import productRoutes from "./routes/product.js";
-import transactionRoutes from "./routes/transactionRoutes.js";
+import transactionRoutes from "./routes/transaction.js";
+import Product from "./models/Product.js";
+import KPI from "./models/KPI.js";
+import Transaction from "./models/Transaction.js";
+import { kpis, products, transactions } from "./data/data.js";
 
 dotenv.config();
 const app = express();
@@ -23,14 +27,17 @@ app.use("/kpi", kpiRoutes);
 app.use("/product", productRoutes);
 app.use("/transaction", transactionRoutes);
 
-// Connect to MongoDB
+const PORT = process.env.PORT || 9000;
 mongoose
   .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then(() => console.log("Database connected"))
+  .then(async () => {
+    app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
+    await mongoose.connection.db.dropDatabase();
+    // KPI.insertMany(kpis);
+    // Product.insertMany(products);
+    // Transaction.insertMany(transactions);
+  })
   .catch((error) => console.log(`${error} did not connect`));
-
-// Export the app for Vercel
-module.exports = app;
