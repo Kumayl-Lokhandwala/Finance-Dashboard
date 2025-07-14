@@ -19,7 +19,8 @@
     "helmet": "^7.1.0",
     "mongoose": "^8.5.3",
     "mongoose-currency": "^0.3.0",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "serverless-http": "^3.2.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.4"
