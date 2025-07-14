@@ -73,9 +73,7 @@ const Dashboard = () => {
               gridAutoRows: "80px",
               gridTemplateAreas: gridTemplateSmallScreens,
             }
-          
       }
-
     >
       <Row1 />
       <Row2 />
