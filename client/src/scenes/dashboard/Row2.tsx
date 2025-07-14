@@ -3,11 +3,10 @@ import DashboardBox from "@/components/DashboardBox";
 import FlexBetween from "@/components/FlexBetween";
 import { useGetKpisQuery, useGetProductsQuery } from "@/state/api";
 import { Box, Typography, useTheme } from "@mui/material";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import {
   CartesianGrid,
   Cell,
-  Legend,
   Line,
   LineChart,
   Pie,
@@ -50,15 +49,13 @@ const Row2 = () => {
   const productExpenseData = useMemo(() => {
     return (
       productData &&
-      productData.map(
-        ({ _id, price, expense }) => {
-          return {
-            id:_id,
-            price: price,
-            expense: expense,
-          };
-        }
-      )
+      productData.map(({ _id, price, expense }) => {
+        return {
+          id: _id,
+          price: price,
+          expense: expense,
+        };
+      })
     );
   }, [productData]);
 
@@ -138,7 +135,7 @@ const Row2 = () => {
               paddingAngle={2}
               dataKey="value"
             >
-              {pieData.map((entry, index) => (
+              {pieData.map((_, index) => (
                 <Cell key={`cell-${index}`} fill={pieColor[index]} />
               ))}
             </Pie>
@@ -198,9 +195,13 @@ const Row2 = () => {
               tickFormatter={(v) => `$${v}`}
             />
             <ZAxis type="number" range={[20]} />
-            <Tooltip formatter={(v) => `$${v}`}/>
-              
-            <Scatter name="Product Expense Ratio" data={productExpenseData} fill={palette.tertiary[500]} />
+            <Tooltip formatter={(v) => `$${v}`} />
+
+            <Scatter
+              name="Product Expense Ratio"
+              data={productExpenseData}
+              fill={palette.tertiary[500]}
+            />
           </ScatterChart>
         </ResponsiveContainer>
       </DashboardBox>

@@ -8,8 +8,7 @@ import {
 } from "@/state/api";
 import { Box, Typography, useTheme } from "@mui/material";
 import { DataGrid, GridCellParams } from "@mui/x-data-grid";
-import React, { useMemo } from "react";
-import { render } from "react-dom";
+import { useMemo } from "react";
 import { Cell, Pie, PieChart } from "recharts";
 
 const Row3 = () => {
@@ -155,8 +154,8 @@ const Row3 = () => {
           />
         </Box>
       </DashboardBox>
-      <DashboardBox gridArea="i" sx={{height:"175px"}}>
-      <BoxHeader title="Expense Breakdown By Category" sideText="+4%" />
+      <DashboardBox gridArea="i" sx={{ height: "175px" }}>
+        <BoxHeader title="Expense Breakdown By Category" sideText="+4%" />
         <FlexBetween mt="0.5rem" gap="0.5rem" p="0 1rem" textAlign="center">
           {pieChartData?.map((data, i) => (
             <Box key={`${data[0].name}-${i}`}>
@@ -169,7 +168,7 @@ const Row3 = () => {
                   paddingAngle={2}
                   dataKey="value"
                 >
-                  {data.map((entry, index) => (
+                  {data.map((_, index) => (
                     <Cell key={`cell-${index}`} fill={pieColors[index]} />
                   ))}
                 </Pie>
@@ -179,25 +178,29 @@ const Row3 = () => {
           ))}
         </FlexBetween>
       </DashboardBox>
-      <DashboardBox gridArea="j" sx={{margin:"20px 0px"}}>
-        <BoxHeader title="Overall Summary and Explanantion of Data" sideText="+15%" />
+      <DashboardBox gridArea="j" sx={{ margin: "20px 0px" }}>
+        <BoxHeader
+          title="Overall Summary and Explanantion of Data"
+          sideText="+15%"
+        />
         <Box
-        height ="15px"
-        margin="1.25rem 1rem 0.4rem 1rem"
-        bgcolor={palette.primary[800]}
-        borderRadius="1rem">
-          <Box
-          height ="15px"
-          bgcolor={palette.primary[600]}
+          height="15px"
+          margin="1.25rem 1rem 0.4rem 1rem"
+          bgcolor={palette.primary[800]}
           borderRadius="1rem"
-          width="40%">
-          </Box>
+        >
+          <Box
+            height="15px"
+            bgcolor={palette.primary[600]}
+            borderRadius="1rem"
+            width="40%"
+          ></Box>
           <Typography variant="h6" margin="0 1rem">
             XYZ
           </Typography>
         </Box>
       </DashboardBox>
-    </> 
+    </>
   );
 };
 

@@ -2,13 +2,21 @@ import DashboardBox from "@/components/DashboardBox";
 import FlexBetween from "@/components/FlexBetween";
 import { useGetKpisQuery } from "@/state/api";
 import { Box, Button, Typography, useTheme } from "@mui/material";
-import React, { useMemo, useState } from "react";
-import { CartesianGrid, Label, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
-import regression, {DataPoint} from "regression";
+import { useMemo, useState } from "react";
+import {
+  CartesianGrid,
+  Label,
+  Legend,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
+import regression, { DataPoint } from "regression";
 
-type Props = {};
-
-const Prediction = (props: Props) => {
+const Prediction = () => {
   const { palette } = useTheme();
   const [isPredictions, setIsPredictions] = useState(false);
   const { data: kpiData } = useGetKpisQuery();
@@ -68,39 +76,47 @@ const Prediction = (props: Props) => {
             left: 20,
             bottom: 80,
           }}
+        >
+          <CartesianGrid strokeDasharray={"3 3"} stroke={palette.grey[800]} />
+          <XAxis dataKey="name" tickLine={false} style={{ fontSize: "10px" }}>
+            <Label value="Months" position="insideBottom" offset={-5} />
+          </XAxis>
+          <YAxis
+            domain={[12000, 26000]}
+            style={{ fontSize: "10px" }}
+            axisLine={{ strokeWidth: "0" }}
+            tickFormatter={(v) => `$${v}`}
           >
-            <CartesianGrid strokeDasharray={"3 3"} stroke={palette.grey[800]}/>
-          <XAxis dataKey="name" tickLine={false} style={{fontSize: "10px"}}>
-            <Label value="Months" position="insideBottom" offset={-5}/>
-            </XAxis>
-          <YAxis domain = {[12000,26000]} style={{fontSize: "10px"}} axisLine={{strokeWidth:"0"}} tickFormatter={(v)=>`$${v}`} >
-          <Label value="Revenue in USD" position="insideLeft" offset={-5} angle={-90}/>
-            </YAxis>
+            <Label
+              value="Revenue in USD"
+              position="insideLeft"
+              offset={-5}
+              angle={-90}
+            />
+          </YAxis>
           <Tooltip />
-          <Legend verticalAlign="top"/>
+          <Legend verticalAlign="top" />
           <Line
             type="monotone"
             dataKey="Actual Revenue"
             stroke={palette.primary.main}
             strokeWidth={0}
-            dot={{strokeWidth:5}}
-            />
-            <Line
+            dot={{ strokeWidth: 5 }}
+          />
+          <Line
             type="monotone"
             dataKey="Regression Line"
             stroke="#8884d8"
             dot={false}
+          />
+          {isPredictions && (
+            <Line
+              strokeDasharray={"5 5"}
+              type="monotone"
+              dataKey={"Predicted Revenue"}
+              stroke={palette.secondary[500]}
             />
-            {isPredictions && (
-                <Line 
-                strokeDasharray={"5 5"}
-                type="monotone"
-                dataKey={"Predicted Revenue"}
-                stroke={palette.secondary[500]}
-                />
-
-                
-            )}
+          )}
         </LineChart>
       </ResponsiveContainer>
     </DashboardBox>

@@ -1,6 +1,4 @@
-import DashboardBox from "@/components/DashboardBox";
 import { Box, useMediaQuery } from "@mui/material";
-import { gridTabIndexCellSelector } from "@mui/x-data-grid";
 import Row1 from "./Row1";
 import Row2 from "./Row2";
 import Row3 from "./Row3";
